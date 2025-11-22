@@ -84,8 +84,8 @@ public class FoodController {
     public ResponseEntity<Page<FoodResponseDTO>> getPaginatedFoods(
             @RequestParam(required = false, defaultValue = "0") int pageNumber,
             @RequestParam(required = false, defaultValue = "8") int pageSize,
-            @RequestParam(required = false, defaultValue = "all") String catagoryId,
+            @RequestParam(required = false, defaultValue = "all") String categoryId,
             @RequestParam(required = false, defaultValue = "all") String search) {
-        return ResponseEntity.ok(foodService.getPaginatedFoods(pageNumber, pageSize, catagoryId, search));
+        return ResponseEntity.ok(foodService.getPaginatedFoods(pageNumber, pageSize, categoryId, search));
     }
 }

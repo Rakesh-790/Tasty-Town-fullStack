@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/catagories`;
+const BASE_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/categories`;
 
 export const fetchCategories = async () => {
     try {
@@ -12,10 +12,10 @@ export const fetchCategories = async () => {
     }
 };
 
-export const deleteCategory = async (catagoryId) => {
+export const deleteCategory = async (categoryId) => {
     const token = localStorage.getItem('accessToken');
     try {
-        const response = await axios.delete(`${BASE_URL}/${catagoryId}`,
+        const response = await axios.delete(`${BASE_URL}/${categoryId}`,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -30,12 +30,12 @@ export const deleteCategory = async (catagoryId) => {
     }
 };
 
-export const addCategory = async (catagoryName) => {
+export const addCategory = async (categoryName) => {
     const token = localStorage.getItem('accessToken');
     try {
         const response = await axios.post(`${BASE_URL}/add`,
             {
-                catagoryName
+                categoryName
             },
             {
                 headers : {

@@ -20,5 +20,5 @@ public interface IFoodService {
 
     FoodResponseDTO deleteFood(String foodId)throws IOException;
 
-    Page<FoodResponseDTO> getPaginatedFoods(int pageNumber, int pageSize, String catagoryId, String search);
+    Page<FoodResponseDTO> getPaginatedFoods(int pageNumber, int pageSize, String categoryId, String search);
 } 

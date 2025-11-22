@@ -17,7 +17,7 @@ const ExploreFood = () => {
   const fetchFoods = async () => {
     try {
       const data = await fetchPaginatedFoods(currentPage, pageSize, {
-        catagoryId: selectedCategoryId,
+        categoryId: selectedCategoryId,
         searchText: searchText,
       });
 
@@ -59,8 +59,8 @@ const ExploreFood = () => {
                 >
                   <option value="all">All</option>
                   {categories.map((category) => (
-                    <option key={category.catagoryId} value={category.catagoryId}>
-                      {category.catagoryName}
+                    <option key={category.categoryId} value={category.categoryId}>
+                      {category.categoryName}
                     </option>
                   ))}
                 </select>

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalException {
-    @ExceptionHandler(CatagoryNotFoundException.class)
-    public ProblemDetail handleNoSuchElementException(CatagoryNotFoundException e) {
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ProblemDetail handleNoSuchElementException(CategoryNotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setTitle("Item not found");
         problemDetail.setProperty("timestamp", LocalDateTime.now().toString());

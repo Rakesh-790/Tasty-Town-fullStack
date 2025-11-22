@@ -43,8 +43,8 @@ export const fetchPaginatedFoods = async (pageNumber = 0, pageSize = 4, filters 
   try {
     let url = `${BASE_URL}/paginated-foods?page=${pageNumber}&size=${pageSize}`;
 
-    if (filters.catagoryId && filters.catagoryId !== 'all') {
-      url += `&catagoryId=${filters.catagoryId}`;
+    if (filters.categoryId && filters.categoryId !== 'all') {
+      url += `&categoryId=${filters.categoryId}`;
     }
 
     if (filters.searchText && filters.searchText.trim() !== '') {
@@ -143,7 +143,7 @@ export const addFood = async (foodData, image) => {
         foodName: foodData.name,
         foodDescription: foodData.description,
         foodPrice: foodData.price,
-        catagoryId: foodData.category
+        categoryId: foodData.category
       })],
       { type: 'application/json' }
     )

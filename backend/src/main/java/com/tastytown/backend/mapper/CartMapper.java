@@ -13,7 +13,7 @@ public class CartMapper {
         .getFoodId(), 
         item.getQuantity(), 
         item.getFood().getFoodName(), 
-        item.getFood().getCatagory().getCatagoryName(), 
+        item.getFood().getCategory().getCategoryName(), 
         item.getFood().getFoodPrice())).toList();
         return new CartResponseDTO(items);
     }

@@ -29,6 +29,6 @@ public class Food {
     private String foodImage;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "catagory_id")
-    private Catagory catagory;
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

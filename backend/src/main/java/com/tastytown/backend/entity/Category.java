@@ -18,11 +18,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Catagory {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String catagoryId;
+    private String categoryId;
 
     @NotNull
-    private String catagoryName;
+    private String categoryName;
 }

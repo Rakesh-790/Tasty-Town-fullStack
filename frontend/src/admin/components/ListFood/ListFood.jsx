@@ -55,7 +55,7 @@ const ListFood = () => {
                     <img src={`https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/images/${food.foodImage}`} alt="" height={48} width={48} />
                   </td>
                   <td>{food.foodName}</td>
-                  <td>{food.catagoryName}</td>
+                  <td>{food.categoryName}</td>
                   <td>&#8377;{food.price}</td>
                   <td className="text-danger">
                     <i

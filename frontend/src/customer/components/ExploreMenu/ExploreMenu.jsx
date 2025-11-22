@@ -62,9 +62,9 @@ const ExploreMenu = () => {
                             className="text-center explore-menu-list-item"
                             onClick={() =>
                                 setCategory((prev) =>
-                                    prev === item.catagoryId
+                                    prev === item.categoryId
                                         ? "All"
-                                        : item.catagoryId
+                                        : item.categoryId
                                 )
                             }
                         >
@@ -72,7 +72,7 @@ const ExploreMenu = () => {
                                 src={item.icon}
                                 alt=""
                                 className={
-                                    item.catagoryId === category
+                                    item.categoryId === category
                                         ? "rounded-circle active"
                                         : "rounded-circle"
                                 }
@@ -81,12 +81,12 @@ const ExploreMenu = () => {
                             />
                             <p
                                 className={
-                                    item.catagoryId === category
+                                    item.categoryId === category
                                         ? "mt-2 fw-bold text-active"
                                         : "mt-2 fw-bold"
                                 }
                             >
-                                {item.catagoryName}
+                                {item.categoryName}
                             </p>
                         </div>
                     );

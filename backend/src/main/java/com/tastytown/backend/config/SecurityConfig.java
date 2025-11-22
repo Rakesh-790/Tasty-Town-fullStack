@@ -39,7 +39,7 @@ public class SecurityConfig {
 
                         // Public GET endpoints
                         .requestMatchers(HttpMethod.GET, "/api/v1/foods/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/catagories/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/images/**").permitAll()
 
                         // Authentication endpoints (public)
@@ -55,9 +55,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/foods/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/foods/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/foods/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/catagories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/catagories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/catagories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/v1/orders").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/orders/**").hasRole("ADMIN")
 

@@ -36,7 +36,7 @@ const AddFood = () => {
         try {
             await addFood(food, image);
             toast.success('Food added successfully.');
-            setFood({ name: '', description: '', category: categories[0]?.catagoryId || '', price: '' });
+            setFood({ name: '', description: '', category: categories[0]?.categoryId || '', price: '' });
             setImage(null);
         } catch (error) {
             toast.error('Error adding food.');
@@ -71,8 +71,8 @@ const AddFood = () => {
                                 <label htmlFor="category" className="form-label">Category</label>
                                 <select name="category" id="category" className='form-control' onChange={onChangeHandler} value={food.category || ""} required>
                                     {categories.map(category => (
-                                        <option key={category.catagoryId} value={category.catagoryId}>
-                                            {category.catagoryName}
+                                        <option key={category.categoryId} value={category.categoryId}>
+                                            {category.categoryName}
                                         </option>
                                     ))}
                                 </select>

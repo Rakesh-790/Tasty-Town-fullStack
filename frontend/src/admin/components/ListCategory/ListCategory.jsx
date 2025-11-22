@@ -35,12 +35,12 @@ const ListCategory = () => {
           <tbody>
             {categories.map((category) => {
               return (
-                <tr key={category.catagoryId}>
-                  <td>{category.catagoryName}</td>
+                <tr key={category.categoryId}>
+                  <td>{category.categoryName}</td>
                   <td className="text-danger">
                     <i
                       className="bi bi-trash-fill fs-4"
-                      onClick={() => removeFood(category.catagoryId)}
+                      onClick={() => removeFood(category.categoryId)}
                     ></i>
                   </td>
                 </tr>
