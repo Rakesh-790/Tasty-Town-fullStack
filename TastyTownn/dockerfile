@@ -1,0 +1,26 @@
+# Use Java 17 JDK base image
+FROM eclipse-temurin:17-jdk
+
+# Set working directory
+WORKDIR /app
+
+# Copy Maven wrapper & pom.xml
+COPY mvnw .
+COPY mvnw.cmd .
+COPY .mvn .mvn
+COPY pom.xml .
+
+# Download dependencies and go offline
+RUN ./mvnw dependency:go-offline -B
+
+# Copy source code
+COPY src src
+
+# Package application
+RUN ./mvnw package -DskipTests
+
+# Expose port (Render controls it but still good practice)
+EXPOSE 8080
+
+# Start application
+CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
