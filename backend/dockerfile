@@ -10,20 +10,20 @@ COPY mvnw.cmd .
 COPY .mvn/ .mvn/
 COPY pom.xml .
 
-# Give executable permission to mvnw (IMPORTANT)
+# Give executable permission to mvnw
 RUN chmod +x mvnw
 
-# Download dependencies and go offline
-RUN ./mvnw dependency:go-offline -B
+# Download dependencies + build jar (safer than go-offline)
+RUN ./mvnw -B -e -DskipTests clean package
 
 # Copy source code
 COPY src/ src/
 
-# Package application
-RUN ./mvnw package -DskipTests
+# Rebuild application after copying sources
+RUN ./mvnw -B -e -DskipTests clean package
 
-# Expose port (Render will assign PORT dynamically)
+# Expose port (Render uses dynamic PORT anyway)
 EXPOSE 8080
 
-# Start application — make sure jar name is correct
+# Start application — ensure jar name is correct
 CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
