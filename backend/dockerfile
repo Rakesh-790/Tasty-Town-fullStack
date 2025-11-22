@@ -7,20 +7,23 @@ WORKDIR /app
 # Copy Maven wrapper & pom.xml
 COPY mvnw .
 COPY mvnw.cmd .
-COPY .mvn .mvn
+COPY .mvn/ .mvn/
 COPY pom.xml .
+
+# Give executable permission to mvnw (IMPORTANT)
+RUN chmod +x mvnw
 
 # Download dependencies and go offline
 RUN ./mvnw dependency:go-offline -B
 
 # Copy source code
-COPY src src
+COPY src/ src/
 
 # Package application
 RUN ./mvnw package -DskipTests
 
-# Expose port (Render controls it but still good practice)
+# Expose port (Render will assign PORT dynamically)
 EXPOSE 8080
 
-# Start application
+# Start application — make sure jar name is correct
 CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
