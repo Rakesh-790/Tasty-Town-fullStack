@@ -15,7 +15,7 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cors = new CorsConfiguration();
 
-        cors.setAllowedOrigins(List.of("http://localhost:5173", "gentle-cendol-b80a5d.netlify.app"));
+        cors.setAllowedOriginPatterns(List.of("http://localhost:5173","https://*.netlify.app"));
         cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         cors.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         cors.setExposedHeaders(List.of("Authorization"));
@@ -26,4 +26,3 @@ public class CorsConfig {
         return source;
     }
 }
-
