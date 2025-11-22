@@ -4,26 +4,26 @@ FROM eclipse-temurin:17-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper & pom.xml
+# Copy Maven wrapper and pom.xml
 COPY mvnw .
 COPY mvnw.cmd .
 COPY .mvn/ .mvn/
 COPY pom.xml .
 
-# Give executable permission to mvnw
+# Give permission to mvnw
 RUN chmod +x mvnw
 
-# Download dependencies + build jar (safer than go-offline)
-RUN ./mvnw -B -e -DskipTests clean package
+# Download dependencies (this will pass)
+RUN ./mvnw -B dependency:resolve dependency:resolve-plugins
 
-# Copy source code
+# Copy source code AFTER dependencies are downloaded
 COPY src/ src/
 
-# Rebuild application after copying sources
-RUN ./mvnw -B -e -DskipTests clean package
+# Build the application
+RUN ./mvnw -B -DskipTests clean package
 
-# Expose port (Render uses dynamic PORT anyway)
+# Expose port (Render assigns dynamic port)
 EXPOSE 8080
 
-# Start application — ensure jar name is correct
+# Run the JAR file
 CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
