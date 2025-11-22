@@ -6,7 +6,7 @@ import ListCategory from "../admin/components/ListCategory/ListCategory";
 import AddCategory from "../admin/components/AddCategory/AddCategory";
 import { Route, Routes } from "react-router-dom";
 import ErrorPage from "../customer/pages/ErrorPage";
-import Sidebar from "../admin/components/sidebar/Sidebar";
+import Sidebar from "../admin/components/Sidebar/Sidebar";
 import AdminNavbar from "../admin/components/Navbar/AdminNavbar";
 
 const AdminRoutes = () => {
