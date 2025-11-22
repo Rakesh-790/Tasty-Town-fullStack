@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:1300/tasty-town/api/v1/orders";
+const API_URL = "https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/orders";
 
 export const placeOrder = async (token, data) => {    
     try {

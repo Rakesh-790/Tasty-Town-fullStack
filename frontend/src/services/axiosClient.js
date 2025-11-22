@@ -8,7 +8,7 @@ export function setAccessToken(token) {
 
 // Create instance
 const axiosClient = axios.create({
-  baseURL: "http://localhost:1300",
+  baseURL: "https://tasty-backend-wvib.onrender.com/tasty-town",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -26,7 +26,7 @@ async function refreshAccessToken() {
   if (!refreshToken) throw new Error("No refresh token");
 
   const { data } = await axios.post(
-    "http://localhost:1300/tasty-town/api/v1/auth/refresh",
+    "https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/auth/refresh",
     { refreshToken }
   );
 

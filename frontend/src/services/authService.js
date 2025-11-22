@@ -1,6 +1,6 @@
 import axiosClient, { setAccessToken } from "../services/axiosClient";
 
-const API = "/tasty-town/api/v1/auth";
+const API = "https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/auth";
 
 export const login = async (credentials) => {
   const response = await axiosClient.post(`${API}/login`, credentials);

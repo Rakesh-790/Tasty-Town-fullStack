@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:1300/tasty-town/api/v1/foods';
+const BASE_URL = 'https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/foods';
 
 export const fetchFoods = async () => {
   try {

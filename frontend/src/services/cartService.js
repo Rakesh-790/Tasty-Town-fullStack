@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:1300/tasty-town/api/v1/cart`;
+const API_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/cart`;
 import axios from "axios";
 
 export const getCartByUserId = async (token) => {
