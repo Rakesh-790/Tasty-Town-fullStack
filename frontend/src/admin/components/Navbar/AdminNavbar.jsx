@@ -14,7 +14,6 @@ const AdminNavbar = () => {
         </button>
         <img src="/logo.png" alt="..." height={41} width={32} />
       </div>
-      <i className='bi bi-list'></i>
     </nav>
   )
 }
