@@ -1,5 +1,5 @@
 const API_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/cart`;
-import axiosClient from "axiosClient.js";
+import axiosClient from "../services/axiosClient";
 
 export const getCartByUserId = async (token) => {
     try {

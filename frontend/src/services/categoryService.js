@@ -1,4 +1,4 @@
-import axiosClient from "axiosClient.js";
+import axiosClient from "../services/axiosClient";
 
 const BASE_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/categories`;
 
