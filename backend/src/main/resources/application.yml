@@ -52,7 +52,7 @@ upload:
 
 order:
   delivery:
-    fee: 49
+    fee: 10
   tax:
     rate: 0.1
 
