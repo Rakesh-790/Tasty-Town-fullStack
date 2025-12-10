@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosClient from "axiosClient.js";
 
 const BASE_URL = 'https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/foods';
 
 export const fetchFoods = async () => {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axiosClient.get(BASE_URL);
     console.log("foods ", response.data);
 
     return response.data;
@@ -16,7 +16,7 @@ export const fetchFoods = async () => {
 
 export const fetchFoodById = async (foodId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/foodId`);
+    const response = await axiosClient.get(`${BASE_URL}/foodId`);
     console.log("food by id ", response.data);
 
     return response.data;
@@ -51,7 +51,7 @@ export const fetchPaginatedFoods = async (pageNumber = 0, pageSize = 4, filters 
       url += `&search=${encodeURIComponent(filters.searchText.trim())}`;
     }
 
-    const response = await axios.get(url);
+    const response = await axiosClient.get(url);
     // console.log('paginated foods', response.data);
 
     return response.data;
@@ -65,7 +65,7 @@ export const fetchPaginatedFoods = async (pageNumber = 0, pageSize = 4, filters 
 
 export const getFoodsByCategory = async (categoryId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/categories/${categoryId}/foods`);
+    const response = await axiosClient.get(`${BASE_URL}/categories/${categoryId}/foods`);
     console.log("Foods By Category", response.data);
     return response.data;
   } catch (error) {
@@ -76,7 +76,7 @@ export const getFoodsByCategory = async (categoryId) => {
 
 export const getFoodById = async (foodId) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${foodId}`);
+    const response = await axiosClient.get(`${BASE_URL}/${foodId}`);
     // console.log("Food by id", response.data);        
     return response.data;
   } catch (error) {
@@ -91,7 +91,7 @@ export const getFoodById = async (foodId) => {
 export const deleteFood = async (foodId) => {
   const token = localStorage.getItem('accessToken');
   try {
-    const response = await axios.delete(`${BASE_URL}/${foodId}`,
+    const response = await axiosClient.delete(`${BASE_URL}/${foodId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -160,7 +160,7 @@ export const addFood = async (foodData, image) => {
   }
 
   try {
-    const response = await axios.post(`${BASE_URL}`, formData, {
+    const response = await axiosClient.post(`${BASE_URL}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`

@@ -1,9 +1,10 @@
 import axiosClient, { setAccessToken } from "../services/axiosClient";
+import axios from "axios";
 
 const API = "https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/auth";
 
 export const login = async (credentials) => {
-  const response = await axiosClient.post(`${API}/login`, credentials);
+  const response = await axios.post(`${API}/login`, credentials);
 
   const access = response.data.accessToken;
   const refresh = response.data.refreshToken;
@@ -21,7 +22,7 @@ export const login = async (credentials) => {
 };
 
 export const registerUser = async (data) => {
-  return axiosClient.post(`${API}/register`, data);
+  return axios.post(`${API}/register`, data);
 };
 
 export const logout = async () => {

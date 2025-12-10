@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosClient from "axiosClient.js";
 
 const API_URL = "https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/orders";
 
 export const placeOrder = async (token, data) => {    
     try {
-        const response = await axios.post(`${API_URL}`,
+        const response = await axiosClient.post(`${API_URL}`,
             data,
             { 
                 headers: { 
@@ -23,7 +23,7 @@ export const placeOrder = async (token, data) => {
 
 export const fetchUserOrders = async (token) => {
     try {
-        const response = await axios.get(
+        const response = await axiosClient.get(
             `${API_URL}/user`, 
             {
                 headers: { 
@@ -44,7 +44,7 @@ export const fetchUserOrders = async (token) => {
 // after admin => fetch all orders 
 export const fetchAllOrders = async (token) => {   
     try {
-        const response = await axios.get(
+        const response = await axiosClient.get(
             `${API_URL}/all`, 
             {
                 headers: { 
@@ -63,7 +63,7 @@ export const fetchAllOrders = async (token) => {
 
 export const updateOrderStatus = async (orderCode, newStatus, token) => {
   try {
-    const response = await axios.put(
+    const response = await axiosClient.put(
       `${API_URL}/${orderCode}/status`,
       null, // No body, since status is sent as a query param
       {

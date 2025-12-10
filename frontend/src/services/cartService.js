@@ -1,9 +1,9 @@
 const API_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/cart`;
-import axios from "axios";
+import axiosClient from "axiosClient.js";
 
 export const getCartByUserId = async (token) => {
     try {
-        const response = await axios.get(`${API_URL}`, 
+        const response = await axiosClient.get(`${API_URL}`, 
             {
                 headers: { Authorization: `Bearer ${token}` },
             },
@@ -20,7 +20,7 @@ export const getCartByUserId = async (token) => {
 export const addItemToCart = async (foodId, quantity) => {
     const token = localStorage.getItem("accessToken");
     try {
-        const response = await axios.post(`${API_URL}/items`,
+        const response = await axiosClient.post(`${API_URL}/items`,
             {
                 foodId,
                 quantity
@@ -43,7 +43,7 @@ export const updateItemQuantity = async (foodId, quantity) => {
     const token = localStorage.getItem("accessToken");
 
     try {
-        const response = await axios.put(
+        const response = await axiosClient.put(
             `${API_URL}/updateQuantity`,
             {
                 foodId, 
@@ -68,7 +68,7 @@ export const removeItemFromCart = async (foodId) => {
     const token = localStorage.getItem("accessToken");
 
     try {
-        const response = await axios.delete(
+        const response = await axiosClient.delete(
             `${API_URL}/item/${foodId}`,
             {
                 headers: {
@@ -86,7 +86,7 @@ export const removeItemFromCart = async (foodId) => {
 
 export const clearCartItems = async (token) => {
     try {
-        await axios.delete(`${API_URL}`, {
+        await axiosClient.delete(`${API_URL}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
         // console.log(`clearing cart items`);

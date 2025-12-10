@@ -1,10 +1,10 @@
-import axios from "axios"
+import axiosClient from "axiosClient.js";
 
 const BASE_URL = `https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/categories`;
 
 export const fetchCategories = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}`);
+        const response = await axiosClient.get(`${BASE_URL}`);
         // console.log("fetching all categories", response.data);
         return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const fetchCategories = async () => {
 export const deleteCategory = async (categoryId) => {
     const token = localStorage.getItem('accessToken');
     try {
-        const response = await axios.delete(`${BASE_URL}/${categoryId}`,
+        const response = await axiosClient.delete(`${BASE_URL}/${categoryId}`,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -33,7 +33,7 @@ export const deleteCategory = async (categoryId) => {
 export const addCategory = async (categoryName) => {
     const token = localStorage.getItem('accessToken');
     try {
-        const response = await axios.post(`${BASE_URL}/add`,
+        const response = await axiosClient.post(`${BASE_URL}/add`,
             {
                 categoryName
             },
