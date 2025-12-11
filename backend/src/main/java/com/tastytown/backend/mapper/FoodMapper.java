@@ -10,12 +10,12 @@ public class FoodMapper {
 
     }
 
-    public static Food convertToEntity(FoodRequestDTO foodRequestDTO, Category existingCategory, String fileName) {
+    public static Food convertToEntity(FoodRequestDTO foodRequestDTO, Category existingCategory, String foodImage) {
         return Food.builder()
                 .foodName(foodRequestDTO.foodName())
                 .foodDescription(foodRequestDTO.foodDescription())
                 .foodPrice(foodRequestDTO.foodPrice())
-                .foodImage(fileName)
+                .foodImage(foodImage)
                 .category(existingCategory)
                 .build();
     }

@@ -52,7 +52,7 @@ const ListFood = () => {
               return (
                 <tr key={food.foodId}>
                   <td>
-                    <img src={`https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/images/${food.foodImage}`} alt="" height={48} width={48} />
+                    <img src={food.foodImage} alt="" height={48} width={48} />
                   </td>
                   <td>{food.foodName}</td>
                   <td>{food.categoryName}</td>

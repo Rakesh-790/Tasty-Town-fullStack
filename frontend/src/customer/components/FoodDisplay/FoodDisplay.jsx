@@ -10,7 +10,7 @@ const FoodDisplay = ({ foods }) => {
               name={food.foodName}
               description={food.description}
               id={food.foodId}
-              image={`https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/images/${food.foodImage}`}
+              image={food.foodImage}
               price={food.price} />
           ))
         ) : (

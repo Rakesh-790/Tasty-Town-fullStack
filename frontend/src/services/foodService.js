@@ -162,7 +162,6 @@ export const addFood = async (foodData, image) => {
   try {
     const response = await axiosClient.post(`${BASE_URL}`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`
       }
     });

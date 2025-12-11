@@ -54,7 +54,7 @@ const FoodDetails = () => {
             <img
               onLoad={() => setLoaded(true)}
               className={`card-img-top mb-5 mb-md-0 rounded-4 img-thumbnail ${styles["food-image"]} ${loaded ? styles.fadeIn : styles.imageHidden}`}
-              src={`https://tasty-backend-wvib.onrender.com/tasty-town/api/v1/images/${data.foodImage}`}
+              src={data.foodImage}
               alt="..."
               // height={450}
               // width={60}

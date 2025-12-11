@@ -42,7 +42,7 @@ axiosClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // ❌ Do not refresh token for public auth routes
+    // Do not refresh token for public auth routes
     if (
       originalRequest.url.includes("/auth/login") ||
       originalRequest.url.includes("/auth/register") ||
