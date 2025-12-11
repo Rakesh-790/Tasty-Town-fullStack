@@ -3,6 +3,7 @@ package com.tastytown.backend.service.impl;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,23 +18,28 @@ import com.tastytown.backend.mapper.FoodMapper;
 import com.tastytown.backend.repository.FoodRepository;
 import com.tastytown.backend.service.ICategoryService;
 import com.tastytown.backend.service.IFoodService;
+import com.tastytown.backend.service.IImageService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class FoodServiceImpl implements IFoodService {
+
     private final ICategoryService categoryService;
     private final FoodRepository foodRepository;
-    private final FoodServiceHelper foodServiceHelper;
+    private final FoodServiceHelper foodServiceHelper; // you can later remove image-related methods from this helper
+    private final IImageService imageService;          // NEW: Cloudinary service
+
     @Override
     public FoodResponseDTO createFood(FoodRequestDTO foodRequestDTO, MultipartFile foodImage) throws IOException {
         var existingCategory = categoryService.getCategoryById(foodRequestDTO.categoryId());
-        // save the image in the folder
-        var fileName = foodServiceHelper.uploadFile(foodImage);
 
-        // save the food in the database
-        var food = FoodMapper.convertToEntity(foodRequestDTO, existingCategory, fileName);
+        // Upload image to Cloudinary instead of local folder
+        String imageUrl = imageService.uploadFoodImage(foodImage);
+
+        // Save the food in the database with Cloudinary URL
+        var food = FoodMapper.convertToEntity(foodRequestDTO, existingCategory, imageUrl);
         var savedFood = foodRepository.save(food);
 
         return FoodMapper.convertToDTO(savedFood);
@@ -42,8 +48,6 @@ public class FoodServiceImpl implements IFoodService {
     @Override
     public List<FoodResponseDTO> getAllFoods() {
         var food = foodRepository.findAll();
-        // return food.stream().map(foodItem ->
-        // FoodMapper.convertToDTO(foodItem)).toList();
         return food.stream().map(FoodMapper::convertToDTO).toList();
     }
 
@@ -56,23 +60,29 @@ public class FoodServiceImpl implements IFoodService {
 
     @Override
     public FoodResponseDTO updateFood(String foodId,
-            FoodRequestDTO dto, MultipartFile foodImage) throws IOException {
+                                      FoodRequestDTO dto,
+                                      MultipartFile foodImage) throws IOException {
+
         var existingFood = foodRepository.findById(foodId)
                 .orElseThrow(() -> new NoSuchElementException("Food not found with id: " + foodId));
-        // var category = categoryService.getCategoryById(dto.categroyId());
+
         existingFood.setFoodName(dto.foodName());
         existingFood.setFoodPrice(dto.foodPrice());
         existingFood.setFoodDescription(dto.foodDescription());
 
+        // If new image is provided, upload to Cloudinary and replace URL
         if (foodImage != null && !foodImage.isEmpty()) {
-            foodServiceHelper.deleteFoodImage(existingFood.getFoodImage());
-            var newFoodImageName = foodServiceHelper.uploadFile(foodImage);
-            existingFood.setFoodImage(newFoodImageName);
-            if (dto.categoryId() != null && !dto.categoryId().isEmpty()) {
-                var categories = categoryService.getCategoryById(dto.categoryId());
-                existingFood.setCategory(categories);
-            }
+            // OPTIONAL: you can delete old Cloudinary image if you store public_id
+            // For now, just upload new and overwrite the URL
+            String newImageUrl = imageService.uploadFoodImage(foodImage);
+            existingFood.setFoodImage(newImageUrl);
         }
+
+        if (dto.categoryId() != null && !dto.categoryId().isEmpty()) {
+            var categories = categoryService.getCategoryById(dto.categoryId());
+            existingFood.setCategory(categories);
+        }
+
         var savedFood = foodRepository.save(existingFood);
         return FoodMapper.convertToDTO(savedFood);
     }
@@ -81,22 +91,25 @@ public class FoodServiceImpl implements IFoodService {
     public FoodResponseDTO deleteFood(String foodId) throws IOException {
         var food = foodRepository.findById(foodId)
                 .orElseThrow(() -> new NoSuchElementException("Food not found with id: " + foodId));
-        foodServiceHelper.deleteFoodImage(food.getFoodImage());
+
+        // IMPORTANT: no more local file delete here.
+        // If you want to delete from Cloudinary, you'd need to store public_id (not only URL).
+
         foodRepository.deleteById(foodId);
         return FoodMapper.convertToDTO(food);
-
     }
 
-    @SuppressWarnings("null")
     @Override
-    public Page<FoodResponseDTO> getPaginatedFoods(int pageNumber, int pageSize, String categoryId, String search) {
+    public Page<FoodResponseDTO> getPaginatedFoods(int pageNumber,
+                                                   int pageSize,
+                                                   String categoryId,
+                                                   String search) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        // filternation
         Page<Food> foodPage;
         if (categoryId != null && !categoryId.equals("all") && !search.equals("all")) {
-            foodPage = foodRepository.findByCategory_CategoryIdAndFoodNameContainingIgnoreCase(categoryId, search,
-                    pageable);
+            foodPage = foodRepository
+                    .findByCategory_CategoryIdAndFoodNameContainingIgnoreCase(categoryId, search, pageable);
         } else if (!categoryId.equals("all")) {
             foodPage = foodRepository.findByCategory_CategoryId(categoryId, pageable);
         } else if (!search.equals("all")) {
