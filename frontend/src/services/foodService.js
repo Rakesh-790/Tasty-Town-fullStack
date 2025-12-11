@@ -136,7 +136,7 @@ export const addFood = async (foodData, image) => {
   }
 
   try {
-    const response = await axiosClient.post(`${BASE_URL}/${food-add}`, formData, {
+    const response = await axiosClient.post(`${BASE_URL}/food-add`, formData, {
       headers: {
         Authorization: `Bearer ${token}`
       }
