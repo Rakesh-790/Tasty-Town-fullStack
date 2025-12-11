@@ -106,30 +106,6 @@ export const deleteFood = async (foodId) => {
   }
 }
 
-// export const addFood = async (data) => {
-//     const token = localStorage.getItem('token');
-
-//     const payload = {
-//         foodName: data.name,
-//         foodDescription: data.description,
-//         foodPrice: parseFloat(data.price),
-//         categoryId: data.category
-//     };
-
-//     try {
-//         const response = await axios.post(BASE_URL, payload, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`
-//             }
-//         });
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error adding food:", error);
-//         throw error;
-//     }
-// };
-
-// const IMG_URL = 'http://localhost:1300/tasty-town/api/v1/images';
 
 export const addFood = async (foodData, image) => {
   const token = localStorage.getItem('accessToken');
@@ -160,7 +136,7 @@ export const addFood = async (foodData, image) => {
   }
 
   try {
-    const response = await axiosClient.post(`${BASE_URL}`, formData, {
+    const response = await axiosClient.post(`${BASE_URL}/${food-add}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`
       }
