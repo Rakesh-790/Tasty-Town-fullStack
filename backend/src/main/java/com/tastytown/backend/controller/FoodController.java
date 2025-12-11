@@ -68,7 +68,7 @@ public class FoodController {
         return new ResponseEntity<>(foodService.deleteFood(foodId), HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/food-add")
+    @PostMapping("/createfood")
     @ApiResponse(description = "extracted the image successfully")
     @Operation(summary = "create details of the food and Image")
     public ResponseEntity<FoodResponseDTO> saveFood(@RequestPart String json,
