@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.tastytown.backend.service.IImageService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class ImageServiceImpl implements IImageService {
