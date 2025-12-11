@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.tastytown.backend.service.IImageService;
 
 @Service
+@RequiredArgsConstructor
 public class ImageServiceImpl implements IImageService {
     private final Cloudinary cloudinary;
 
