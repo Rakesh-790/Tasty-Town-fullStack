@@ -8,7 +8,7 @@ export function setAccessToken(token) {
 
 // Create instance
 const axiosClient = axios.create({
-  baseURL: "https://tasty-backend-wvib.onrender.com/tasty-town",
+  baseURL: "https://tasty-backend-wvib.onrender.com/tasty-town"
 });
 
 // Attach token
