@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,23 +14,27 @@ import com.tastytown.backend.service.IImageService;
 
 @Service
 public class ImageServiceImpl implements IImageService {
-    @Value("${upload.file.dir}")
-    private String FILE_DIR;
+    private final Cloudinary cloudinary;
 
     @Override
-    public byte[] extractFoodImages(String foodImageName) throws IOException {
-        if (foodImageName == null || foodImageName.isEmpty()) {
-            throw new NoSuchElementException("Image Name not found");
+    public String uploadFoodImage(MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("File is empty");
         }
 
-        var file = new File(FILE_DIR + File.separator + foodImageName);
-        if (!file.exists()) {
-            throw new FileNotFoundException("File not found with name" + foodImageName);
-        }
-        var fis = new FileInputStream(file);
-        byte[] image = fis.readAllBytes();
-        fis.close();
+        Map uploadResult = cloudinary.uploader().upload(
+                file.getBytes(),
+                ObjectUtils.emptyMap()
+        );
 
-        return image;
+        // Cloudinary returns many properties, we care about the URL
+        return uploadResult.get("secure_url").toString();
+    }
+
+    @Override
+    public void deleteFoodImage(String publicId) throws IOException {
+        if (publicId == null || publicId.isBlank()) return;
+
+        cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
     }
 }
