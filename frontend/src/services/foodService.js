@@ -41,7 +41,7 @@ export const fetchFoodById = async (foodId) => {
 
 export const fetchPaginatedFoods = async (pageNumber = 0, pageSize = 4, filters = {}) => {
   try {
-    let url = `${BASE_URL}/paginated-foods?page=${pageNumber}&size=${pageSize}`;
+    let url = `${BASE_URL}/paginated-foods?pageNumber=${pageNumber}&pageSize=${pageSize}`;
 
     if (filters.categoryId && filters.categoryId !== 'all') {
       url += `&categoryId=${filters.categoryId}`;
