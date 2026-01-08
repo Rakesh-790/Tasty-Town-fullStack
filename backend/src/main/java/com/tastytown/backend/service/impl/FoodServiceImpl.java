@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.tastytown.backend.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -61,6 +62,7 @@ public class FoodServiceImpl implements IFoodService {
     }
 
     @Override
+    @Transactional
     public FoodResponseDTO updateFood(String foodId,
                                       FoodRequestDTO dto,
                                       MultipartFile foodImage) throws IOException {

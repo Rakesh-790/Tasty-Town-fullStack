@@ -156,12 +156,15 @@ export const updateFood = async (foodId, foodData, foodImage) => {
     // VERY IMPORTANT: backend expects a String called "json"
     formData.append(
       "json",
-      JSON.stringify({
-        foodName: foodData.name ,
-        foodDescription: foodData.description ,
-        foodPrice: Number(foodData.price),
-        categoryId: foodData.category
-      })
+      new Blob(
+        [JSON.stringify({
+          foodName: foodData.name,
+          foodDescription: foodData.description,
+          foodPrice: Number(foodData.price),
+          categoryId: foodData.category
+        })],
+        { type: "application/json" }
+      )
     );
 
     // Optional image
