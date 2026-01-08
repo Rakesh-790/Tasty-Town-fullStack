@@ -52,7 +52,7 @@ public class FoodController {
 
     }
 
-    @PutMapping(value = "/{foodId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "update-food/{foodId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponse(description = "food update successfully")
     @Operation(summary = "Update a food by Id")
     public ResponseEntity<FoodResponseDTO> updateFood(@PathVariable String foodId, @RequestPart("json") String json,

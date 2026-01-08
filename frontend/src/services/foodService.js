@@ -172,7 +172,7 @@ export const updateFood = async (foodId, foodData, foodImage) => {
       formData.append("foodImage", foodImage);
     }
 
-    const response = await axiosClient.put(`${BASE_URL}/${foodId}`,formData);
+    const response = await axiosClient.put(`${BASE_URL}/update-food/${foodId}`,formData);
 
     return response.data;
   } catch (error) {
