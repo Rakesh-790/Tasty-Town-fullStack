@@ -148,3 +148,32 @@ export const addFood = async (foodData, image) => {
     throw error;
   }
 };
+
+export const updateFood = async (foodId, foodData, foodImage) => {
+  try {
+    const formData = new FormData();
+
+    // VERY IMPORTANT: backend expects a String called "json"
+    formData.append(
+      "json",
+      JSON.stringify({
+        foodName: foodData.name ,
+        foodDescription: foodData.description ,
+        foodPrice: Number(foodData.price),
+        categoryId: foodData.category
+      })
+    );
+
+    // Optional image
+    if (foodImage) {
+      formData.append("foodImage", foodImage);
+    }
+
+    const response = await axiosClient.put(`${BASE_URL}/${foodId}`,formData);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating food:", error);
+    throw error;
+  }
+};

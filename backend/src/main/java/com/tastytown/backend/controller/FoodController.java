@@ -52,11 +52,11 @@ public class FoodController {
 
     }
 
-    @PutMapping("/{foodId}")
+    @PutMapping(value = "/{foodId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponse(description = "food update successfully")
     @Operation(summary = "Update a food by Id")
-    public ResponseEntity<FoodResponseDTO> updateFood(@PathVariable String foodId, @RequestPart String json,
-             @RequestPart(required = false) MultipartFile foodImage) throws IOException{
+    public ResponseEntity<FoodResponseDTO> updateFood(@PathVariable String foodId, @RequestPart("json") String json,
+             @RequestPart(value = "foodImage", required = false) MultipartFile foodImage) throws IOException{
         FoodRequestDTO dto = objectMapper.readValue(json, FoodRequestDTO.class);
         return ResponseEntity.ok(foodService.updateFood(foodId, dto, foodImage));
     }

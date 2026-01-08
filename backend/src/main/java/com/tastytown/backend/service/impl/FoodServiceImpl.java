@@ -74,13 +74,17 @@ public class FoodServiceImpl implements IFoodService {
         if (foodImage != null && !foodImage.isEmpty()) {
             // OPTIONAL: you can delete old Cloudinary image if you store public_id
             // For now, just upload new and overwrite the URL
-            String newImageUrl = imageService.uploadFoodImage(foodImage);
-            existingFood.setFoodImage(newImageUrl);
+           try {
+                String newImageUrl = imageService.uploadFoodImage(foodImage);
+                existingFood.setFoodImage(newImageUrl);
+            } catch (Exception e) {
+                throw new RuntimeException("Image upload failed", e);
+            }
         }
 
         if (dto.categoryId() != null && !dto.categoryId().isEmpty()) {
-            var categories = categoryService.getCategoryById(dto.categoryId());
-            existingFood.setCategory(categories);
+           categoryRepository.findById(dto.categoryId())
+                    .ifPresent(existingFood::setCategory);
         }
 
         var savedFood = foodRepository.save(existingFood);

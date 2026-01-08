@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./ListFood.css";
 import { deleteFood, fetchFoods } from "../../../services/foodService";
@@ -14,6 +15,17 @@ const ListFood = () => {
     } catch (error) {
       toast.error("Error while reading the foods.");
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleEditFood = (food) => {
+    navigate("/admin/add-food", {
+      state: {
+        isEdit: true,
+        food: food,
+      },
+    });
   };
 
   const removeFood = async (foodId) => {
@@ -61,6 +73,9 @@ const ListFood = () => {
                     <i
                       className="bi bi-trash-fill fs-4"
                       onClick={() => removeFood(food.foodId)}
+                    ></i>
+                    <i className="bi bi-pencil-square fs-4"
+                      onClick={() => handleEditFood(food)}
                     ></i>
                   </td>
                 </tr>
