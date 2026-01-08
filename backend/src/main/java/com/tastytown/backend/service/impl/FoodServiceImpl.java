@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.tastytown.backend.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,7 @@ public class FoodServiceImpl implements IFoodService {
     private final FoodRepository foodRepository;
     private final FoodServiceHelper foodServiceHelper; // you can later remove image-related methods from this helper
     private final IImageService imageService;          // NEW: Cloudinary service
+    private final CategoryRepository categoryRepository;
 
     @Override
     public FoodResponseDTO createFood(FoodRequestDTO foodRequestDTO, MultipartFile foodImage) throws IOException {
