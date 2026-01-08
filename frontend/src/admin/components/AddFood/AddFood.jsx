@@ -79,7 +79,7 @@ const AddFood = () => {
             <div className="row">
                 <div className="card col-md-4">
                     <div className="card-body">
-                        <h2 className="mb-4">Add Food</h2>
+                        <h2 className="mb-4">{isEdit ? "Update Food" : "Add Food"}</h2>
                         <form onSubmit={onSubmitHandler}>
                             <div className="mb-3">
                                 <label htmlFor="image" className="form-label">
