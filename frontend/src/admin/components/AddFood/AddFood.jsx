@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import { addFood } from '../../../services/foodService';
+import { addFood, updateFood } from '../../../services/foodService';
 import { fetchCategories } from '../../../services/categoryService'; // Make sure the path is correct
 import { toast } from 'react-toastify';
 import uploadImage from "../../../assets/upload.png";
